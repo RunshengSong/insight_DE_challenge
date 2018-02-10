@@ -7,6 +7,7 @@ Created on Wed Feb  7 17:28:42 2018
 """
 import helper
 
+import sys
 import math
 import datetime
 import numpy as np
@@ -76,7 +77,7 @@ class DonationAnalyzer():
         """
         this_donor = (input_values[1], input_values[2])
         
-        print input_values
+#         print input_values
         if this_donor in self.records:
             # check if the Year is eailer than the current year
             current_donation_date = datetime.datetime.strptime(input_values[3], '%m%d%Y')
@@ -138,7 +139,7 @@ class DonationAnalyzer():
         # calculate the sum and the percentile of the input repeat donors
         this_sum, this_percentile = self.__calculate_sum_and_percentile(this_repeated_donor_infos)
         
-        return this_CMTE_ID + "|" + this_ZIPCODE + "|" + str(this_Year) + "|" + str(this_sum) + "|" + str(this_percentile) + "|" + str(len(this_repeated_donor_infos))
+        return this_CMTE_ID + "|" + this_ZIPCODE + "|" + str(this_Year) + "|" + str(this_percentile) + "|" + str(this_sum) + "|" + str(len(this_repeated_donor_infos))
 
     def __calculate_sum_and_percentile(self, repeated_donor_infos):
         """
@@ -161,9 +162,13 @@ class DonationAnalyzer():
         
 if __name__ == "__main__":
     # loading just for testing
-    input_data_file_path = "../input/itcont_test.txt"
-    input_percent_file_path = "../input/percentile.txt"
-    output_file_path = "../output/output_test.txt"
+#     input_data_file_path = "../input/itcont.txt"
+#     input_percent_file_path = "../input/percentile.txt"
+#     output_file_path = "../output/repeat_donors.txt"
+    
+    input_data_file_path = sys.argv[1]
+    input_percent_file_path = sys.argv[2]
+    output_file_path = sys.argv[3]
     
     this_analyzer = DonationAnalyzer(input_data_file_path, input_percent_file_path, output_file_path)
     this_analyzer.start()
