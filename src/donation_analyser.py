@@ -39,7 +39,7 @@ class DonationAnalyzer():
             with open(self.output_file_path, 'wb') as output_file:
                 for each_input_string in input_file:
                     count += 1
-                    print count 
+#                     print count 
                     each_input_string = each_input_string.split('|')
                     if helper.is_valid_input(each_input_string):                            
                         this_input_list = helper.get_relevant_field(each_input_string)
@@ -91,10 +91,9 @@ class DonationAnalyzer():
             # deal with the non-chronologically streamings....
             for each_records in this_donor_donate_records:
                 each_donation_Year = datetime.datetime.strptime(each_records[1], '%m%d%Y').year
-                if current_donation_Year >= each_donation_Year:
-                    # if the current donation happens 
-                    # after than the recored donation date
-                    # than it is a repeated donar
+                if current_donation_Year > each_donation_Year:
+                    # only check if the donor've donated in prior year
+                    # exclude the same year and years later than the current year
                     return True
             return False
         else:
@@ -150,10 +149,10 @@ class DonationAnalyzer():
         """
         to_sum_up = []
         for each_lists in repeated_donor_infos:
-            this_AMT = int(each_lists[-1])
+            this_AMT = float(each_lists[-1])
             to_sum_up.append(this_AMT)
         
-        return np.sum(to_sum_up), self.__nearest_percentile(to_sum_up, self.input_percentile)
+        return int(round(np.sum(to_sum_up))), int(round(self.__nearest_percentile(to_sum_up, self.input_percentile)))
     
     def __nearest_percentile(self, amounts, input_percent):
         """
@@ -164,20 +163,19 @@ class DonationAnalyzer():
         return amounts[ordinal_rank - 1]
         
 if __name__ == "__main__":
-    start = timeit.default_timer()
+#     start = timeit.default_timer()
+#     
+#     # loading just for testing
+#     input_data_file_path = "../input/itcont_spec.txt"
+#     input_percent_file_path = "../input/percentile.txt"
+#     output_file_path = "../output/repeat_donors_spec.txt"
     
-    # loading just for testing
-    input_data_file_path = "../input/itcont_test_spec.txt"
-    input_percent_file_path = "../input/percentile.txt"
-    output_file_path = "../output/repeat_donors_spec.txt"
-    
-#     input_data_file_path = sys.argv[1]
-#     input_percent_file_path = sys.argv[2]
-#     output_file_path = sys.argv[3]
+    input_data_file_path = sys.argv[1]
+    input_percent_file_path = sys.argv[2]
+    output_file_path = sys.argv[3]
     
     this_analyzer = DonationAnalyzer(input_data_file_path, input_percent_file_path, output_file_path)
     this_analyzer.start()
-    
-    
-    end = timeit.default_timer()
-    print("The running time is : %d." % (end - start))
+#     
+#     end = timeit.default_timer()
+#     print("The running time is : %d." % (end - start))

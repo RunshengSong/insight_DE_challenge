@@ -37,8 +37,10 @@ def has_valid_zip_code(input_values):
 def has_valid_name(input_values):
     """
     check if the name is valid
+    assume that every name must has comma in it
     """
     name = input_values[7].strip()
+    return ',' in name
 
 def has_no_other_missing_field(input_values):
     """
@@ -47,6 +49,9 @@ def has_no_other_missing_field(input_values):
     """
     CMTE_ID = input_values[0]
     TRANSACTION_AMT = input_values[14]
+    if int(TRANSACTION_AMT) < 0:
+        print input_values
+        raw_input()
     return not (CMTE_ID == "" or TRANSACTION_AMT == "")
 
 def is_valid_input(input_values):
@@ -57,6 +62,7 @@ def is_valid_input(input_values):
     Input: Input_value, str
     """
     return has_no_other_ID(input_values) and \
+           has_valid_name(input_values) and \
            has_valid_date(input_values) and \
            has_valid_zip_code(input_values) and \
            has_no_other_missing_field(input_values)
