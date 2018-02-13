@@ -75,7 +75,7 @@ if __name__ == "__main__":
     # loading just for testing
 #     input_data_file_path = "../input/itcont_test.txt"
 #     input_percent_file_path = "../input/percentile.txt"
-#     
+#      
 #     with open(input_data_file_path, 'r') as myfile:
 #         for each_line in myfile:
 #             this_value = each_line.split("|")
