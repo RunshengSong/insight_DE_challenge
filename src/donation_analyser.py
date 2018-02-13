@@ -166,9 +166,9 @@ if __name__ == "__main__":
 #     start = timeit.default_timer()
 #     
 #     # loading just for testing
-#     input_data_file_path = "../input/itcont_spec.txt"
+#     input_data_file_path = "../input/itcont_large.txt"
 #     input_percent_file_path = "../input/percentile.txt"
-#     output_file_path = "../output/repeat_donors_spec.txt"
+#     output_file_path = "../output/repeat_donors_large.txt"
     
     input_data_file_path = sys.argv[1]
     input_percent_file_path = sys.argv[2]

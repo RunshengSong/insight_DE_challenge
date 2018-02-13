@@ -40,7 +40,7 @@ def has_valid_name(input_values):
     assume that every name must has comma in it
     """
     name = input_values[7].strip()
-    return ',' in name
+    return ', ' in name
 
 def has_no_other_missing_field(input_values):
     """
@@ -49,9 +49,6 @@ def has_no_other_missing_field(input_values):
     """
     CMTE_ID = input_values[0]
     TRANSACTION_AMT = input_values[14]
-    if int(TRANSACTION_AMT) < 0:
-        print input_values
-        raw_input()
     return not (CMTE_ID == "" or TRANSACTION_AMT == "")
 
 def is_valid_input(input_values):
@@ -74,11 +71,12 @@ def get_relevant_field(input_values):
     return [input_values[0], input_values[7], input_values[10][:5], input_values[13], input_values[14], input_values[15]]
 
 if __name__ == "__main__":
+    pass
     # loading just for testing
-    input_data_file_path = "../input/itcont_test.txt"
-    input_percent_file_path = "../input/percentile.txt"
-    
-    with open(input_data_file_path, 'r') as myfile:
-        for each_line in myfile:
-            this_value = each_line.split("|")
-            print is_valid_input(this_value)
+#     input_data_file_path = "../input/itcont_test.txt"
+#     input_percent_file_path = "../input/percentile.txt"
+#     
+#     with open(input_data_file_path, 'r') as myfile:
+#         for each_line in myfile:
+#             this_value = each_line.split("|")
+#             print is_valid_input(this_value)
